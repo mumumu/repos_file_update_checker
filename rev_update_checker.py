@@ -22,7 +22,7 @@ class TargetRepository(object):
 
     def update(self):
         os.chdir(self.repository_path)
-        subprocess.check_output(['hg', 'update'])
+        subprocess.check_output(['hg', 'pull'])
 
 
 class TargetFileRevision(object):
