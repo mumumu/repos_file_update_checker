@@ -27,11 +27,11 @@ class TargetRepositoryBase(object):
 
 class TargetFileRevisionBase(object):
 
-    def __init__(self, target_file_path):
+    def __init__(self, repository_type, target_file_path):
         self.target_file_path = os.path.realpath(target_file_path)
         self.basename = os.path.basename(target_file_path).split('.')[0]
         self.revision_file_path = os.path.join(
-            tempfile.gettempdir(), '.%s.txt' % self.basename)
+            tempfile.gettempdir(), '.%s.%s.txt' % (repository_type, self.basename))
 
     @property
     def latest(self):
@@ -52,7 +52,7 @@ class TargetFileRevisionBase(object):
     def previous(self):
         if not os.path.exists(self.revision_file_path):
             return 0
-        self.check_revision_number()
+        return self.check_revision_number()
 
     def save_latest(self):
         with open(self.revision_file_path, 'w') as f:

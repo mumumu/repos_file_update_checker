@@ -24,8 +24,8 @@ class PluginLoader(object):
     def load_repository(self, repos_url, local_path):
         return self._load('TargetRepository')(repos_url, local_path)
 
-    def load_revision(self, target_file_path):
-        return self._load('TargetFileRevision')(target_file_path)
+    def load_revision(self, repos_type, target_file_path):
+        return self._load('TargetFileRevision')(repos_type, target_file_path)
 
 
 if __name__ == '__main__':
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         args.clone_local_path
     )
     target_repository.update()
-    target_revision = plugin.load_revision(args.target_file)
+    target_revision = plugin.load_revision(args.type, args.target_file)
     if target_revision.latest != target_revision.previous:
         target_revision.notify_update_by_mail(
             NOTIFY_MAIL_FROM,

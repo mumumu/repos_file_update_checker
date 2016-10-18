@@ -51,4 +51,5 @@ class TargetFileRevision(TargetFileRevisionBase):
         return self._latest_revision_io.readlines()[4].strip()
 
     def check_revision_number(self):
-        pass
+        with open(self.revision_file_path, 'r') as f:
+            return f.readline().strip()
