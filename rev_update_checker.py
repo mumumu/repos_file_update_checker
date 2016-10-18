@@ -6,9 +6,9 @@ import argparse
 import importlib
 
 
-NOTIFY_SMTP_SERVER = 'localhost'
-NOTIFY_SMTP_SERVER_PORT = 25
-NOTIFY_MAIL_FROM = 'noreply@localhost'
+NOTIFY_SMTP_SERVER = 'mailserver.mumumu.org'
+NOTIFY_SMTP_SERVER_PORT = 587
+NOTIFY_MAIL_FROM = 'noreply@mumumu.org'
 
 
 class PluginLoader(object):
