@@ -1,4 +1,4 @@
-## specific File update checker on Git or Mercurial Repository
+## File update checker on Git or Mercurial Repository
 
 You can check specific file update history on Mercurial or Git Repository and notify it via email.
 
