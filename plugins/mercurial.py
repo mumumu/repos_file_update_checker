@@ -51,3 +51,10 @@ class TargetFileRevision(TargetFileRevisionBase):
                 'hg', 'log', '-l', '1',
                 '--template', '{desc}', self.target_file_path
             ])
+
+    def check_revision_number(self):
+        with open(self.revision_file_path, 'r') as f:
+            try:
+                return int(f.readline())
+            except ValueError:
+                raise Exception('revision number is broken')

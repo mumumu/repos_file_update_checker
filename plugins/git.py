@@ -49,3 +49,6 @@ class TargetFileRevision(TargetFileRevisionBase):
     @property
     def latest_log(self):
         return self._latest_revision_io.readlines()[4].strip()
+
+    def check_revision_number(self):
+        pass

@@ -20,7 +20,6 @@ class TargetRepositoryBase(object):
         raise NotImplementedError
 
     def update(self):
-        print(self.repository_local_path)
         if not os.path.exists(self.repository_local_path):
             self.clone()
         self._update_internal()
@@ -46,15 +45,14 @@ class TargetFileRevisionBase(object):
     def latest_log(self):
         raise NotImplementedError
 
+    def check_revision_number(self):
+        raise NotImplementedError
+
     @property
     def previous(self):
         if not os.path.exists(self.revision_file_path):
             return 0
-        with open(self.revision_file_path, 'r') as f:
-            try:
-                return int(f.readline())
-            except ValueError:
-                raise Exception('revision number is broken')
+        self.check_revision_number()
 
     def save_latest(self):
         with open(self.revision_file_path, 'w') as f:

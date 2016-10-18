@@ -6,9 +6,9 @@ import argparse
 import importlib
 
 
-NOTIFY_SMTP_SERVER = 'mailserver.mumumu.org'
-NOTIFY_SMTP_SERVER_PORT = 587
-NOTIFY_MAIL_FROM = 'nobody@mumumu.org'
+NOTIFY_SMTP_SERVER = 'localhost'
+NOTIFY_SMTP_SERVER_PORT = 25
+NOTIFY_MAIL_FROM = 'noreply@localhost'
 
 
 class PluginLoader(object):
@@ -32,26 +32,20 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='specific file Revision Update Checker for git, mercurial')
     parser.add_argument(
-        '--type',
-        type=str,
-        dest='type',
+        'type',
         choices=['git', 'mercurial'],
         help='repository type')
     parser.add_argument(
         'target_file',
-        nargs='?',
         help='revision check target file')
     parser.add_argument(
         'notify_mail_addr',
-        nargs='?',
         help='your mail address')
     parser.add_argument(
         'clone_repos_url',
-        nargs='?',
         help='repository url')
     parser.add_argument(
         'clone_local_path',
-        nargs='?',
         help='clone repository local path')
 
     args = parser.parse_args()
