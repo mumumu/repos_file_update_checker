@@ -1,6 +1,6 @@
-## File update checker on Mercurial Repository
+## specific File update checker on Git or Mercurial Repository
 
-You can check specific file update history on Mercurial Repository and notify it via email.
+You can check specific file update history on Mercurial or Git Repository and notify it via email.
 
 ## Motivation
 
@@ -8,18 +8,15 @@ I wanted to check update history ONLY pep-0008.txt on hg.python.org, but commit 
 
 ## Requirement
 
-- Mercurial
+This program is tested only on `*nix`. Patches are welcome.
+
+- Mercurial or git
 - Python 2.7 or later
 
 ## Usage
 
-Usage Example on `*nix`.  
-You will register the last command on the job scheduler like crontab.
-
 ```
-$ cd /tmp
-$ hg clone https://hg.python.org/peps
-$ python rev_update_checker.py pep-0008.txt you@mail.address /tmp/peps
+$ git clone git@github.com:mumumu/repos_file_update_checker.git
 ```
 
 You can change the following setting on `rev_update_checker.py`
@@ -28,4 +25,19 @@ You can change the following setting on `rev_update_checker.py`
 NOTIFY_SMTP_SERVER = 'localhost'
 NOTIFY_SMTP_PORT = 25
 NOTIFY_MAIL_FROM = 'nobody@yourdomain'
+```
+
+Finally, you execute update check command.
+You will register the last command on the job scheduler like crontab.
+
+- on mercurial
+
+```
+$ python rev_update_checker.py --type=mercurial pep-0008.txt you@yourmail.address https://hg.python.org/peps/ /tmp/tmp_peps_dir
+```
+
+- on git
+
+```
+$ python rev_update_checker.py --type=git pep-0008.txt you@yourmail.address https://github.com/python/peps.git /tmp/tmp_peps_dir
 ```
