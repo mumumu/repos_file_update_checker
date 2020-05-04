@@ -2,7 +2,7 @@
 
 import os
 import subprocess
-import StringIO
+import io
 
 from . import TargetRepositoryBase, TargetFileRevisionBase
 
@@ -26,12 +26,12 @@ class TargetFileRevision(TargetFileRevisionBase):
 
     @property
     def _latest_revision_io(self):
-        return StringIO.StringIO(
+        return io.StringIO(
             subprocess.check_output(
                 [
                     'git', 'log', '-1', self.target_file_path
                 ]
-            )
+            ).decode('utf-8')
         )
 
     @property
@@ -44,7 +44,7 @@ class TargetFileRevision(TargetFileRevisionBase):
     @property
     def latest_verbose_log(self):
         return subprocess.check_output(
-            ['git', 'log', '-1', '-p', self.target_file_path])
+            ['git', 'log', '-1', '-p', self.target_file_path]).decode('utf-8')
 
     @property
     def latest_log(self):

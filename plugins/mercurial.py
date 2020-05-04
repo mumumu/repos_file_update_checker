@@ -36,13 +36,13 @@ class TargetFileRevision(TargetFileRevisionBase):
             [
                 'hg', 'log', '-l', '1',
                 '--template', '{rev}', self.target_file_path
-            ])
+            ]).decode('utf-8')
         return int(hg_log_output)
 
     @property
     def latest_verbose_log(self):
         return subprocess.check_output(
-            ['hg', 'log', '-l', '1', '-p', '-v', self.target_file_path])
+            ['hg', 'log', '-l', '1', '-p', '-v', self.target_file_path]).decode('utf-8')
 
     @property
     def latest_log(self):
@@ -50,7 +50,7 @@ class TargetFileRevision(TargetFileRevisionBase):
             [
                 'hg', 'log', '-l', '1',
                 '--template', '{desc}', self.target_file_path
-            ])
+            ]).decode('utf-8')
 
     def check_revision_number(self):
         with open(self.revision_file_path, 'r') as f:
